@@ -22,8 +22,9 @@ img {
 
 /* Add margin to the top of the quiz section */
 .container-fluid {
-    margin-top: 50px; /* Adjust this value as needed */
+    /*margin-top: 50px; /* Adjust this value as needed */
     padding: 20px;
+    height: 90% !important;
     border-radius: 20px;
     background: rgba(255, 255, 255, 0.9);
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -63,7 +64,7 @@ img {
     border-radius: 10px;
     cursor: grab;
     background-color: #fff;
-    color: #ff6f61 !important;
+    color: #ff6f61;
     transition: transform 0.2s, background-color 0.2s;
   }
 
@@ -74,7 +75,7 @@ img {
   .option-card:hover {
     transform: scale(1.05); /* Slightly enlarge on hover */
     background-color: #ff6f61; /* Coral background on hover */
-    color: #fff; /* White text on hover */
+    color: #fff !important; /* White text on hover */
   }
   
   .option-card:active {
@@ -87,10 +88,11 @@ img {
     border: 2px dashed #39a2db; /* Dashed border */
     border-radius: 10px;
     padding: 20px;
-    margin-top: 20px;
+    margin: 60px auto 0 auto;
     color: #333;
     font-size: 1.2rem;
     transition: background-color 0.3s;
+    width: 60%;
   }
   
   #answer-box:hover {
@@ -131,4 +133,29 @@ img {
   
   #try-again:hover {
     background-color: #45a049; /* Darker green on hover */
+  }
+
+  /*adjust the review style*/
+  .incorrect-answer {
+    display: flex;
+    justify-content: space-between; /* Space items evenly */
+    gap: 10px; /* Adds spacing between elements */
+    width: 100%;
+    margin-bottom: 10px;
+    border-bottom: 2px solid #ff6f61;
+  }
+  
+  .review_q, .review_a, .review_s {
+    font-size: 90%;
+    flex: 1; /* Ensures both elements take equal space */
+    text-align: left;
+    padding: 0 0 10px 20px;
+  }
+  
+  .review_q {
+    color: #721c24;
+  }
+  
+  .review_a {
+    color: #155724;
   }

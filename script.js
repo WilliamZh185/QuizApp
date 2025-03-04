@@ -125,8 +125,8 @@ const quizData = [
         const questionImg = document.createElement("img");
         questionImg.src = currentQuestion.questionImage;
         questionImg.alt = "Question Image";
-        questionImg.style.width = "300px"; // Set image size for questions
-        questionImg.style.height = "300px";
+        questionImg.style.width = "200px"; // Set image size for questions
+        questionImg.style.height = "200px";
         questionImg.style.marginTop = "10px";
         questionElement.appendChild(questionImg);
     }
@@ -144,8 +144,8 @@ const quizData = [
         const optionImg = document.createElement("img");
         optionImg.src = option.image;
         optionImg.alt = "Option Image";
-        optionImg.style.width = "150px"; // Set image size for options
-        optionImg.style.height = "150px";
+        optionImg.style.width = "100px"; // Set image size for options
+        optionImg.style.height = "100px";
         optionImg.style.marginBottom = "10px";
         optionCard.appendChild(optionImg);
         }
@@ -225,8 +225,15 @@ const quizData = [
     incorrectAnswersElement.innerHTML = ""; // Clear previous incorrect answers
     quizData.forEach((question) => {
       if (question.userAnswer) {
-        const incorrectAnswer = document.createElement("p");
-        incorrectAnswer.textContent = `Q: ${question.question} | Your Answer: ${question.userAnswer} | Correct Answer: ${question.correctAnswer}`;
+        const incorrectAnswer = document.createElement("div");
+        incorrectAnswer.classList.add("incorrect-answer"); // Add class for styling
+    
+        incorrectAnswer.innerHTML = `
+          <span class="review_s">Q: ${question.question}</span>
+          <span class="review_q">Your Answer: ${question.userAnswer}</span> 
+          <span class="review_a">Correct Answer: ${question.correctAnswer}</span>
+        `;
+    
         incorrectAnswersElement.appendChild(incorrectAnswer);
       }
     });
