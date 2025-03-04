@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kids Quiz App</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container-fluid d-flex flex-column justify-content-center align-items-center vh-100">
+    <!-- Quiz Section -->
+    <div id="quiz-section">
+      <h1 id="question" class="text-center mb-4">Question will appear here</h1>
+      <div id="options" class="d-flex flex-wrap justify-content-center gap-3 mb-4">
+        <!-- Options (A, B, C, D) will be dynamically inserted here -->
+      </div>
+      <div id="answer-box" class="text-center p-3 border border-2 border-dashed">
+        <p>Answer Box</p>
+        <p>Pull your answer here</p>
+      </div>
+    </div>
+
+    <!-- Results Section (Hidden Initially) -->
+    <div id="results-section" class="text-center" style="display: none;">
+      <h2 id="results-message"></h2>
+      <div id="incorrect-answers"></div>
+      <button id="try-again" class="btn btn-primary mt-3">Try Again</button>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+</body>
+</html>

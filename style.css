@@ -1,0 +1,134 @@
+/* General Styles */
+body {
+    font-family: 'Comic Neue', cursive, sans-serif; /* Fun font for kids */
+    background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%); /* Gradient background */
+    color: #333;
+    margin: 0;
+    padding: 0;
+    font-size: 1.5rem; /* Bigger font for kids */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+  
+  /* Styling for images */
+img {
+    border-radius: 10px;
+    object-fit: cover; /* Ensure images maintain aspect ratio */
+  }
+  
+
+
+/* Add margin to the top of the quiz section */
+.container-fluid {
+    margin-top: 50px; /* Adjust this value as needed */
+    padding: 20px;
+    border-radius: 20px;
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    width: 90%;
+  }
+  
+  /* Question Styling */
+  #question {
+    font-size: 2rem;
+    color: #ff6f61; /* Coral color */
+    margin-bottom: 20px;
+    /* animation: bounce 1s infinite alternate; /* Bounce animation */
+  }
+  
+  @keyframes bounce {
+    from {
+      transform: translateY(0);
+    }
+    to {
+      transform: translateY(-10px);
+    }
+  }
+  
+  /* Options Styling */
+  #options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .option-card {
+    padding: 15px 30px;
+    border: 2px solid #ff6f61; /* Coral border */
+    border-radius: 10px;
+    cursor: grab;
+    background-color: #fff;
+    color: #ff6f61 !important;
+    transition: transform 0.2s, background-color 0.2s;
+  }
+
+  .option-card p {
+    margin: 0;
+  }
+
+  .option-card:hover {
+    transform: scale(1.05); /* Slightly enlarge on hover */
+    background-color: #ff6f61; /* Coral background on hover */
+    color: #fff; /* White text on hover */
+  }
+  
+  .option-card:active {
+    cursor: grabbing;
+  }
+  
+  /* Answer Box Styling */
+  #answer-box {
+    background-color: #a2d5f2; /* Light blue background */
+    border: 2px dashed #39a2db; /* Dashed border */
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    color: #333;
+    font-size: 1.2rem;
+    transition: background-color 0.3s;
+  }
+  
+  #answer-box:hover {
+    background-color: #39a2db; /* Darker blue on hover */
+    color: #fff; /* White text on hover */
+  }
+  
+  /* Results Section Styling */
+  #results-section {
+    background: rgba(255, 255, 255, 0.9); /* Semi-transparent white background */
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  }
+  
+  #results-message {
+    font-size: 2rem;
+    color: #4caf50; /* Green color for success */
+  }
+  
+  #incorrect-answers {
+    margin-top: 20px;
+    font-size: 1.2rem;
+    color: #ff6f61; /* Coral color for incorrect answers */
+  }
+  
+  /* Try Again Button */
+  #try-again {
+    background-color: #4caf50; /* Green background */
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 1.2rem;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  #try-again:hover {
+    background-color: #45a049; /* Darker green on hover */
+  }
