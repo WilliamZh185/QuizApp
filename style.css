@@ -81,6 +81,13 @@ img {
   .option-card:active {
     cursor: grabbing;
   }
+
+  /* Highlight selected option */
+  .option-card.selected {
+    background-color: #4caf50; /* Green background */
+    color: #fff; /* White text */
+    border-color: #4caf50; /* Green border */
+  }
   
   /* Answer Box Styling */
   #answer-box {
@@ -159,3 +166,24 @@ img {
   .review_a {
     color: #155724;
   }
+
+  /* Responsive Design */
+@media (max-width: 768px) {
+  body {
+    font-size: 1.2rem; /* Smaller font for mobile */
+  }
+
+  #question {
+    font-size: 1.5rem; /* Larger font for question */
+  }
+
+  .option-card {
+    padding: 10px; /* Smaller padding for mobile */
+    font-size: 1rem; /* Smaller font for options */
+  }
+
+  #answer-box {
+    padding: 15px; /* Smaller padding for mobile */
+    font-size: 1rem; /* Smaller font for answer box */
+  }
+}

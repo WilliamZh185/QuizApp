@@ -111,7 +111,7 @@ const quizData = [
   }
   
   // Load Question
-  function loadQuestion() {
+function loadQuestion() {
     const currentQuestion = quizData[currentQuestionIndex];
     questionElement.innerHTML = ""; // Clear previous content
 
@@ -122,13 +122,13 @@ const quizData = [
 
     // Add question image (if available)
     if (currentQuestion.questionImage) {
-        const questionImg = document.createElement("img");
-        questionImg.src = currentQuestion.questionImage;
-        questionImg.alt = "Question Image";
-        questionImg.style.width = "200px"; // Set image size for questions
-        questionImg.style.height = "200px";
-        questionImg.style.marginTop = "10px";
-        questionElement.appendChild(questionImg);
+      const questionImg = document.createElement("img");
+      questionImg.src = currentQuestion.questionImage;
+      questionImg.alt = "Question Image";
+      questionImg.style.width = "200px"; // Set image size for questions
+      questionImg.style.height = "200px";
+      questionImg.style.marginTop = "10px";
+      questionElement.appendChild(questionImg);
     }
 
     // Clear options
@@ -136,11 +136,11 @@ const quizData = [
 
     // Add options
     currentQuestion.options.forEach((option) => {
-        const optionCard = document.createElement("div");
-        optionCard.classList.add("option-card");
+      const optionCard = document.createElement("div");
+      optionCard.classList.add("option-card");
 
-        // Add option image (if available)
-        if (option.image) {
+      // Add option image (if available)
+      if (option.image) {
         const optionImg = document.createElement("img");
         optionImg.src = option.image;
         optionImg.alt = "Option Image";
@@ -148,22 +148,45 @@ const quizData = [
         optionImg.style.height = "100px";
         optionImg.style.marginBottom = "10px";
         optionCard.appendChild(optionImg);
-        }
+      }
 
-        // Add option text
-        const optionText = document.createElement("p");
-        optionText.textContent = option.text;
-        optionCard.appendChild(optionText);
+      // Add option text
+      const optionText = document.createElement("p");
+      optionText.textContent = option.text;
+      optionCard.appendChild(optionText);
 
-        // Make option draggable
-        optionCard.draggable = true;
-        optionCard.addEventListener("dragstart", (e) => {
-        e.dataTransfer.setData("text/plain", option.text);
+      // Make option selectable on tap/click
+      optionCard.addEventListener("click", () => {
+        // Remove selected class from all options
+        document.querySelectorAll(".option-card").forEach((card) => {
+          card.classList.remove("selected");
         });
+        // Add selected class to the clicked option
+        optionCard.classList.add("selected");
+        // Store the selected answer
+        selectedAnswer = option.text;
+      });
 
-        optionsElement.appendChild(optionCard);
+      optionsElement.appendChild(optionCard);
     });
+  }
+
+  // Handle Answer Submission
+  let selectedAnswer = null; // Store the selected answer
+
+  answerBox.addEventListener("click", () => {
+    if (selectedAnswer) {
+      playCoinSound(); // Play coin sound when an answer is submitted
+      checkAnswer(selectedAnswer);
+      selectedAnswer = null; // Reset selected answer
+      // Remove selected class from all options
+      document.querySelectorAll(".option-card").forEach((card) => {
+        card.classList.remove("selected");
+      });
+    } else {
+      alert("Please select an answer first!");
     }
+  });
   
   // Handle Drag-and-Drop
   answerBox.addEventListener("dragover", (e) => {
