@@ -112,64 +112,94 @@ const quizData = [
   
   // Load Question
 function loadQuestion() {
-    const currentQuestion = quizData[currentQuestionIndex];
-    questionElement.innerHTML = ""; // Clear previous content
+  const currentQuestion = quizData[currentQuestionIndex];
+  questionElement.innerHTML = ""; // Clear previous content
 
-    // Add question text
-    const questionText = document.createElement("p");
-    questionText.textContent = currentQuestion.question;
-    questionElement.appendChild(questionText);
+  // Add question text
+  const questionText = document.createElement("p");
+  questionText.textContent = currentQuestion.question;
+  questionElement.appendChild(questionText);
 
-    // Add question image (if available)
-    if (currentQuestion.questionImage) {
-      const questionImg = document.createElement("img");
-      questionImg.src = currentQuestion.questionImage;
-      questionImg.alt = "Question Image";
-      questionImg.style.width = "200px"; // Set image size for questions
-      questionImg.style.height = "200px";
-      questionImg.style.marginTop = "10px";
-      questionElement.appendChild(questionImg);
+  // Add question image (if available)
+  if (currentQuestion.questionImage) {
+    const questionImg = document.createElement("img");
+    questionImg.src = currentQuestion.questionImage;
+    questionImg.alt = "Question Image";
+    questionImg.style.width = "200px"; // Set image size for questions
+    questionImg.style.height = "200px";
+    questionImg.style.marginTop = "10px";
+    questionElement.appendChild(questionImg);
+  }
+
+  // Clear options
+  optionsElement.innerHTML = "";
+
+  // Add options
+  currentQuestion.options.forEach((option) => {
+    const optionCard = document.createElement("div");
+    optionCard.classList.add("option-card");
+
+    // Add option image (if available)
+    if (option.image) {
+      const optionImg = document.createElement("img");
+      optionImg.src = option.image;
+      optionImg.alt = "Option Image";
+      optionImg.style.width = "100px"; // Set image size for options
+      optionImg.style.height = "100px";
+      optionImg.style.marginBottom = "10px";
+      optionCard.appendChild(optionImg);
     }
 
-    // Clear options
-    optionsElement.innerHTML = "";
+    // Add option text
+    const optionText = document.createElement("p");
+    optionText.textContent = option.text;
+    optionCard.appendChild(optionText);
 
-    // Add options
-    currentQuestion.options.forEach((option) => {
-      const optionCard = document.createElement("div");
-      optionCard.classList.add("option-card");
+    // Make option draggable
+    optionCard.draggable = true;
 
-      // Add option image (if available)
-      if (option.image) {
-        const optionImg = document.createElement("img");
-        optionImg.src = option.image;
-        optionImg.alt = "Option Image";
-        optionImg.style.width = "100px"; // Set image size for options
-        optionImg.style.height = "100px";
-        optionImg.style.marginBottom = "10px";
-        optionCard.appendChild(optionImg);
-      }
+    // Add touch event listeners for mobile drag-and-drop
+    let touchStartX, touchStartY;
 
-      // Add option text
-      const optionText = document.createElement("p");
-      optionText.textContent = option.text;
-      optionCard.appendChild(optionText);
-
-      // Make option selectable on tap/click
-      optionCard.addEventListener("click", () => {
-        // Remove selected class from all options
-        document.querySelectorAll(".option-card").forEach((card) => {
-          card.classList.remove("selected");
-        });
-        // Add selected class to the clicked option
-        optionCard.classList.add("selected");
-        // Store the selected answer
-        selectedAnswer = option.text;
-      });
-
-      optionsElement.appendChild(optionCard);
+    optionCard.addEventListener("touchstart", (e) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      touchStartX = touch.clientX;
+      touchStartY = touch.clientY;
+      optionCard.classList.add("dragging");
     });
-  }
+
+    optionCard.addEventListener("touchmove", (e) => {
+      e.preventDefault();
+      const touch = e.touches[0];
+      const deltaX = touch.clientX - touchStartX;
+      const deltaY = touch.clientY - touchStartY;
+      optionCard.style.transform = `translate(${deltaX}px, ${deltaY}px)`;
+    });
+
+    optionCard.addEventListener("touchend", (e) => {
+      e.preventDefault();
+      optionCard.classList.remove("dragging");
+      optionCard.style.transform = "none";
+
+      // Check if the option is dropped over the answer box
+      const answerBoxRect = answerBox.getBoundingClientRect();
+      const optionRect = optionCard.getBoundingClientRect();
+
+      if (
+        optionRect.left < answerBoxRect.right &&
+        optionRect.right > answerBoxRect.left &&
+        optionRect.top < answerBoxRect.bottom &&
+        optionRect.bottom > answerBoxRect.top
+      ) {
+        playCoinSound(); // Play coin sound when an answer is dragged
+        checkAnswer(option.text);
+      }
+    });
+
+    optionsElement.appendChild(optionCard);
+  });
+}
 
   // Handle Answer Submission
   let selectedAnswer = null; // Store the selected answer
